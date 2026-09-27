@@ -105,5 +105,9 @@ jobs:
       - name: Tag release
         run: |
           VERSION="v${{ needs.sync.outputs.version }}"
-          git tag "$VERSION"
+          # re-check in case the tag was created during the approval wait
+          if ! git ls-remote --exit-code --tags origin "refs/tags/$VERSION" >/dev/null 2>&1; then
+            git tag "$VERSION"
+            git push origin "$VERSION"
+          fi
           git push origin "$VERSION"
