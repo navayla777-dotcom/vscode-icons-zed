@@ -12,11 +12,14 @@ jobs:
   sync:
     name: Sync icons and icon theme manifest
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      changed: ${{ steps.diff.outputs.changed }}
     steps:
       - name: Checkout vscode-icons-zed
         uses: actions/checkout@v4
         with:
-          # use a PAT so the pushed commit/tag can trigger release.yml (GITHUB_TOKEN pushes don't trigger other workflows)
+          # use a PAT so the pushed commit can trigger release.yml (GITHUB_TOKEN pushes don't trigger other workflows)
           token: ${{ secrets.COMMITTER_TOKEN }}
 
       - name: Checkout vscode-icons
@@ -72,10 +75,24 @@ jobs:
           git commit -m "chore(icons): sync icons from vscode-icons v${{ steps.version.outputs.version }}"
           git push origin HEAD:${{ github.ref_name }}
 
+  tag:
+    name: Tag release
+    needs: sync
+    if: needs.sync.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    # requires manual approval before the tag is pushed and release.yml is triggered
+    environment: release
+    steps:
+      - name: Checkout vscode-icons-zed
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          # use a PAT so the pushed tag can trigger release.yml (GITHUB_TOKEN pushes don't trigger other workflows)
+          token: ${{ secrets.COMMITTER_TOKEN }}
+
       - name: Tag release
-        if: steps.diff.outputs.changed == 'true'
         run: |
-          VERSION="v${{ steps.version.outputs.version }}"
+          VERSION="v${{ needs.sync.outputs.version }}"
           if ! git ls-remote --exit-code --tags origin "refs/tags/$VERSION" >/dev/null 2>&1; then
             git tag "$VERSION"
             git push origin "$VERSION"
