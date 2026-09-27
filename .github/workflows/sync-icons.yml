@@ -15,6 +15,7 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.version }}
       changed: ${{ steps.diff.outputs.changed }}
+      tag_exists: ${{ steps.tag.outputs.exists }}
     steps:
       - name: Checkout vscode-icons-zed
         uses: actions/checkout@v4
@@ -75,10 +76,21 @@ jobs:
           git commit -m "chore(icons): sync icons from vscode-icons v${{ steps.version.outputs.version }}"
           git push origin HEAD:${{ github.ref_name }}
 
+      - name: Check if tag already exists
+        id: tag
+        run: |
+          VERSION="v${{ steps.version.outputs.version }}"
+          if git ls-remote --exit-code --tags origin "refs/tags/$VERSION" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
   tag:
     name: Tag release
     needs: sync
-    if: needs.sync.outputs.changed == 'true'
+    # only requests approval when there's an actual new tag to push
+    if: needs.sync.outputs.changed == 'true' && needs.sync.outputs.tag_exists == 'false'
     runs-on: ubuntu-latest
     # requires manual approval before the tag is pushed and release.yml is triggered
     environment: release
@@ -93,7 +105,5 @@ jobs:
       - name: Tag release
         run: |
           VERSION="v${{ needs.sync.outputs.version }}"
-          if ! git ls-remote --exit-code --tags origin "refs/tags/$VERSION" >/dev/null 2>&1; then
-            git tag "$VERSION"
-            git push origin "$VERSION"
-          fi
+          git tag "$VERSION"
+          git push origin "$VERSION"
