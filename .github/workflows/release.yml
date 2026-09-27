@@ -5,13 +5,57 @@ on:
     tags:
       - 'v*.*.*'
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g. 12.19.1), independent of vscode-icons. Leave empty to no-op.'
+        required: false
+
+permissions:
+  contents: write
 
 jobs:
   release:
     name: Publish to Zed Extensions
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout vscode-icons-zed
+        if: github.event_name == 'workflow_dispatch' && inputs.version != ''
+        uses: actions/checkout@v4
+        with:
+          # use a PAT so the pushed commit/tag can trigger this workflow again (GITHUB_TOKEN pushes don't trigger other workflows)
+          token: ${{ secrets.COMMITTER_TOKEN }}
+
+      - name: Validate version
+        if: github.event_name == 'workflow_dispatch' && inputs.version != ''
+        run: |
+          VERSION="${{ inputs.version }}"
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Version must be in the form MAJOR.MINOR.PATCH (got '$VERSION')"
+            exit 1
+          fi
+          if git ls-remote --exit-code --tags origin "refs/tags/v$VERSION" >/dev/null 2>&1; then
+            echo "::error::Tag v$VERSION already exists"
+            exit 1
+          fi
+
+      - name: Update extension.toml version
+        if: github.event_name == 'workflow_dispatch' && inputs.version != ''
+        run: sed -i "s/^version = .*/version = \"${{ inputs.version }}\"/" extension.toml
+
+      - name: Commit and tag release
+        if: github.event_name == 'workflow_dispatch' && inputs.version != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add extension.toml
+          git commit -m "chore(release): bump to v${{ inputs.version }}"
+          git push origin HEAD:${{ github.ref_name }}
+          git tag "v${{ inputs.version }}"
+          git push origin "v${{ inputs.version }}"
+
+      # runs on the push triggered above, or on a regular tag push (e.g. from sync-icons.yml)
       - name: Bump Zed extension version
+        if: github.event_name == 'push'
         uses: huacnlee/zed-extension-action@v2
         with:
           extension-name: vscode-icons
