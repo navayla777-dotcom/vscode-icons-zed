@@ -3137,6 +3137,7 @@
         "orval.config.js": "_f_orval",
         "orval.config.ts": "_f_orval",
         "orval.config.mjs": "_f_orval",
+        ".overmind.env": "_f_overmind",
         ".oxlintignore": "_f_oxc",
         ".oxlintrc.json": "_f_oxc",
         ".oxlintrc.jsonc": "_f_oxc",
@@ -6753,6 +6754,9 @@
         },
         "_f_outlook": {
           "path": "./icons/file_type_outlook.svg"
+        },
+        "_f_overmind": {
+          "path": "./icons/file_type_overmind.svg"
         },
         "_f_ovpn": {
           "path": "./icons/file_type_ovpn.svg"
@@ -11033,6 +11037,7 @@
         "orval.config.js": "_f_orval",
         "orval.config.ts": "_f_orval",
         "orval.config.mjs": "_f_orval",
+        ".overmind.env": "_f_overmind",
         ".oxlintignore": "_f_oxc",
         ".oxlintrc.json": "_f_oxc",
         ".oxlintrc.jsonc": "_f_oxc",
@@ -14652,6 +14657,9 @@
         },
         "_f_outlook": {
           "path": "./icons/file_type_outlook.svg"
+        },
+        "_f_overmind": {
+          "path": "./icons/file_type_overmind.svg"
         },
         "_f_ovpn": {
           "path": "./icons/file_type_ovpn.svg"
@@ -18947,6 +18955,7 @@
         "orval.config.js": "_f_orval",
         "orval.config.ts": "_f_orval",
         "orval.config.mjs": "_f_orval",
+        ".overmind.env": "_f_overmind",
         ".oxlintignore": "_f_oxc",
         ".oxlintrc.json": "_f_oxc",
         ".oxlintrc.jsonc": "_f_oxc",
@@ -22688,6 +22697,9 @@
         },
         "_f_outlook": {
           "path": "./icons/file_type_outlook.svg"
+        },
+        "_f_overmind": {
+          "path": "./icons/file_type_overmind.svg"
         },
         "_f_ovpn": {
           "path": "./icons/file_type_ovpn.svg"
@@ -26980,6 +26992,7 @@
         "orval.config.js": "_f_orval",
         "orval.config.ts": "_f_orval",
         "orval.config.mjs": "_f_orval",
+        ".overmind.env": "_f_overmind",
         ".oxlintignore": "_f_oxc",
         ".oxlintrc.json": "_f_oxc",
         ".oxlintrc.jsonc": "_f_oxc",
@@ -30687,6 +30700,9 @@
         },
         "_f_outlook": {
           "path": "./icons/file_type_outlook.svg"
+        },
+        "_f_overmind": {
+          "path": "./icons/file_type_overmind.svg"
         },
         "_f_ovpn": {
           "path": "./icons/file_type_ovpn.svg"
@@ -34979,6 +34995,7 @@
         "orval.config.js": "_f_orval",
         "orval.config.ts": "_f_orval",
         "orval.config.mjs": "_f_orval",
+        ".overmind.env": "_f_overmind",
         ".oxlintignore": "_f_light_oxc",
         ".oxlintrc.json": "_f_light_oxc",
         ".oxlintrc.jsonc": "_f_light_oxc",
@@ -38598,6 +38615,9 @@
         },
         "_f_outlook": {
           "path": "./icons/file_type_outlook.svg"
+        },
+        "_f_overmind": {
+          "path": "./icons/file_type_overmind.svg"
         },
         "_f_ovpn": {
           "path": "./icons/file_type_ovpn.svg"
@@ -42878,6 +42898,7 @@
         "orval.config.js": "_f_orval",
         "orval.config.ts": "_f_orval",
         "orval.config.mjs": "_f_orval",
+        ".overmind.env": "_f_overmind",
         ".oxlintignore": "_f_light_oxc",
         ".oxlintrc.json": "_f_light_oxc",
         ".oxlintrc.jsonc": "_f_light_oxc",
@@ -46500,6 +46521,9 @@
         },
         "_f_outlook": {
           "path": "./icons/file_type_outlook.svg"
+        },
+        "_f_overmind": {
+          "path": "./icons/file_type_overmind.svg"
         },
         "_f_ovpn": {
           "path": "./icons/file_type_ovpn.svg"
@@ -50795,6 +50819,7 @@
         "orval.config.js": "_f_orval",
         "orval.config.ts": "_f_orval",
         "orval.config.mjs": "_f_orval",
+        ".overmind.env": "_f_overmind",
         ".oxlintignore": "_f_light_oxc",
         ".oxlintrc.json": "_f_light_oxc",
         ".oxlintrc.jsonc": "_f_light_oxc",
@@ -54539,6 +54564,9 @@
         },
         "_f_outlook": {
           "path": "./icons/file_type_outlook.svg"
+        },
+        "_f_overmind": {
+          "path": "./icons/file_type_overmind.svg"
         },
         "_f_ovpn": {
           "path": "./icons/file_type_ovpn.svg"
@@ -58831,6 +58859,7 @@
         "orval.config.js": "_f_orval",
         "orval.config.ts": "_f_orval",
         "orval.config.mjs": "_f_orval",
+        ".overmind.env": "_f_overmind",
         ".oxlintignore": "_f_light_oxc",
         ".oxlintrc.json": "_f_light_oxc",
         ".oxlintrc.jsonc": "_f_light_oxc",
@@ -62541,6 +62570,9 @@
         },
         "_f_outlook": {
           "path": "./icons/file_type_outlook.svg"
+        },
+        "_f_overmind": {
+          "path": "./icons/file_type_overmind.svg"
         },
         "_f_ovpn": {
           "path": "./icons/file_type_ovpn.svg"
